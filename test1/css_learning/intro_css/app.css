@@ -1,0 +1,59 @@
+h1 {
+    text-align: center;
+    /*width: 15%;*/
+    font-weight: 400;
+    text-decoration: orange underline wavy;
+    letter-spacing: 7px;
+    font-size: 100px;
+    /*font-family: Verdana, Geneva, Tahoma, sans-serif;*/
+    font-family: monospace;
+}
+
+p {
+    text-align: center;
+    /*font-weight: bold;*/
+    line-height: 2;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+
+h2, h3 {
+    color:magenta;
+}
+
+button {
+    font-size: 30px;
+}
+
+/*id selectors*/
+#username {
+    background-color: brown;
+}
+
+/*class selectors*/
+.please {
+    color: red;
+}
+/*descendant selector*/
+p a {
+    color: green;
+}
+/*adjacent selector*/
+/*p inside h2*/
+h2 + p {
+    color: yellow;
+}
+
+/*attribute selector*/
+input[type=password] {
+    background-color: burlywood;
+}
+
+/*span[class="post"]*/
+
+a[href*="com"] {
+    color:crimson;
+}
+
