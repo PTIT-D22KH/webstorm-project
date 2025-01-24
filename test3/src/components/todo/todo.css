@@ -1,0 +1,31 @@
+.todo-title {
+    font-size: 35px;
+    margin: 15px 0;
+    text-align: center;
+    color: orange;
+    font-weight: 600;
+}
+.todo-new {
+    display: flex;;
+    width: 100%;
+    gap: 15px;
+    justify-content: center;
+}
+.todo-container {
+    margin: 50px auto;
+    width: 600px;
+}
+.todo-data {
+    margin-top: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.todo-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
