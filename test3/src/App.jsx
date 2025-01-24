@@ -9,6 +9,8 @@ import {
   selectCount,
 } from "./redux/counter/counterSlice";
 import styles from './styles/Counter.module.css';
+import ABC from "./components/learn/MyComponent.jsx";
+import {SecondComponent, ThirdComponent} from "./components/learn/SecondComponent.jsx";
 
 export default function App() {
   const count = useSelector(selectCount);
@@ -36,6 +38,9 @@ export default function App() {
           +
         </button>
       </div>
+      <ABC/>
+      <SecondComponent/>
+      <ThirdComponent/>
       <div className={styles.row}>
         <input
           className={styles.textbox}
