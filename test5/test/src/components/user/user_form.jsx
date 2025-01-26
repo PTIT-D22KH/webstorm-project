@@ -6,14 +6,14 @@ const UserForm = () => {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [phone, setPhone] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
     const handleClickButton = () => {
-        const URL_BACKEND = "http://localhost:8080/api/v1/user";
+        const URL_BACKEND = "http://localhost:8080/api/v1/users";
         const data = {
-            fullName: fullName,
+            fullname: fullName,
             email: email,
             password: password,
-            phone: phone
+            phoneNumber: phoneNumber
         }
         axios.post(URL_BACKEND, data);
     }
@@ -36,7 +36,7 @@ const UserForm = () => {
                 }
             >
                 <div>
-                    <span>FullName</span>
+                    <span>Full Name</span>
                     <Input 
                     value={fullName}
                     onChange={(event) => {setFullName(event.target.value)}}
@@ -59,8 +59,8 @@ const UserForm = () => {
                 <div>
                     <span>Phone number</span>
                     <Input
-                    value = {phone}
-                    onChange={(event) => {setPhone(event.target.value)}}
+                    value = {phoneNumber}
+                    onChange={(event) => {setPhoneNumber(event.target.value)}}
                     />
                 </div>
                 <div>
