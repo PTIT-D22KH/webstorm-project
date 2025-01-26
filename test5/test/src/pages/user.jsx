@@ -6,7 +6,7 @@ const UserPage = () => {
         <div>
             Users page
 
-            <div>
+            <div style={{padding: "20px"}}>
                 <UserForm/>
                 <UserTable />
             </div>
