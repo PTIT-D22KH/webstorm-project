@@ -33,13 +33,28 @@ const handleUploadFile = (file, folder) => {
     let config = {
         headers: {
             "upload-type": folder,
+            "Content-Type": "multipart/form-data"
         }
+        
     }
-    return axios.post(URL_BACKEND, data, config);
+    const bodyFormData = new FormData();
+    bodyFormData.append("fileImg", file);
+    return axios.post(URL_BACKEND, bodyFormData, config);
+}
+const updateUserAvatarAPI = (id, fullName, phoneNumber, avatar) => {
+    const URL_BACKEND = `api/v1/users/${id}`;
+    const data = {
+        fullName: fullName,
+        phoneNumber: phoneNumber,
+        avatar: avatar
+    }
+    return axios.put(URL_BACKEND, data);
 }
 export {
     createUserAPI,
     updateUserAPI,
     fetchAllUserAPI,
-    deleteUserAPI
+    deleteUserAPI,
+    handleUploadFile,
+    updateUserAvatarAPI
 }

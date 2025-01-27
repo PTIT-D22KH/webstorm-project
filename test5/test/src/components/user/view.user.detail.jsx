@@ -1,8 +1,9 @@
 import {useState} from "react";
 import {Button, Drawer, Radio, Space} from "antd";
+import { handleUploadFile } from "../../services/api.service";
 
 const ViewUserDetail = (props) => {
-    const {dataDetail, setDataDetail, isDetailOpen, setIsDetailOpen}  = props;
+    const {dataDetail, setDataDetail, isDetailOpen, setIsDetailOpen, loadUser}  = props;
     const [selectedFile, setSelectedFile] = useState(null);
     const [preview, setPreview] = useState(null);
     const handleOnChangeFile = (event) => {
@@ -17,8 +18,25 @@ const ViewUserDetail = (props) => {
         }
 
     }
-    const handleUpdateUserAvatar = () => {
-        console.log("Check file: ", selectedFile);
+    const handleUpdateUserAvatar = async() => {
+        const resUpload = handleUploadFile(selectedFile, "avatar");
+        const newAvatar = resUpload.data.fileUploaded;
+        const resUpdateAvatar = await updateUserAvatarAPI(dataDetail.id, dataDetail.fullName, dataDetail.phoneNumber, newAvatar);
+        if (resUpdateAvatar.data) {
+            setIsDetailOpen(false);
+            setSelectedFile(null);
+            setPreview(null);
+            await loadUser();
+            notification.success({
+                message: "Update User Avatar",
+                description: "Update user avatar successfully!"
+            })
+        } else {
+            notification.error({
+                message: "Error update avatar",
+                description: JSON.stringify(resUpdateAvatar.message)
+            })
+        }
     }
     return (
         <>
