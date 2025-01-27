@@ -3,16 +3,8 @@ import { Space, Table, Tag } from 'antd';
 import {fetchAllUserAPI} from "../../services/api.service.js";
 
 
-const UserTable = () => {
-    const [dataUsers, setDataUsers] = useState([
-        // {name: "Eric", age: 25, address: "HN"},
-        // {name: "hoidanit", age: 25, address: "HCM"}
-    ]);
-
-    useEffect(() => {
-        console.log("Run useEffect 111");
-        loadUser();
-    }, []);
+const UserTable = (props) => {
+    const {dataUsers} = props;
 
     const columns = [
         {
@@ -51,11 +43,7 @@ const UserTable = () => {
     //         tags: ['cool', 'teacher'],
     //     },
     // ];
-    const loadUser = async() => {
-        const res = await fetchAllUserAPI();
-        setDataUsers(res.data);
-        console.log(res);
-    }
+
 
     console.log("Run render 000");
     return (
