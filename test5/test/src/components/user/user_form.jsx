@@ -67,7 +67,7 @@ const UserForm = (props) => {
                     </Button>
                 </div>
                 <Modal
-                    title={"Basic Modal"}
+                    title={"Create User"}
                     open={isModalOpen}
                     onOk={() => handleSubmitBtn(false)}
                     // onCancel={() => setIsModalOpen(false)}
