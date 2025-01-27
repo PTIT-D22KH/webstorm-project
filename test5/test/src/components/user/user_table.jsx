@@ -6,8 +6,9 @@ import UpdateUserModal from "./update.user.modal.jsx";
 
 
 const UserTable = (props) => {
-    const {dataUsers} = props;
-
+    const {dataUsers, loadUser} = props;
+    const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
+    const [dataUpdate, setDataUpdate] = useState(null);
     const columns = [
         {
             title: 'Id',
@@ -15,7 +16,7 @@ const UserTable = (props) => {
             render: (_, record) => {
                 return (
                     <>
-                        <a href={"#"}>{record.id0}</a>
+                        <a href={"#"}>{record.id}</a>
                     </>
                 )
             }
@@ -34,7 +35,13 @@ const UserTable = (props) => {
             render: (_, record) => (
                 <>
                     <div style={{display: "flex", gap: "20px"}}>
-                        <EditOutlined style={{cursor: "pointer", color: "orange"}}/>
+                        <EditOutlined
+                            onClick={() => {
+                                setDataUpdate(record);
+                                setIsModalUpdateOpen(true);
+                            }}
+                            style={{cursor: "pointer", color: "orange"}}
+                        />
                         <DeleteOutlined style={{cursor: "pointer", color: "red"}}/>
                     </div>
 
@@ -43,32 +50,6 @@ const UserTable = (props) => {
             ),
         },
     ];
-    // const data = [
-    //     {
-    //         key: '1',
-    //         name: 'John Brown',
-    //         age: 32,
-    //         address: 'New York No. 1 Lake Park',
-    //         tags: ['nice', 'developer'],
-    //     },
-    //     {
-    //         key: '2',
-    //         name: 'Jim Green',
-    //         age: 42,
-    //         address: 'London No. 1 Lake Park',
-    //         tags: ['loser'],
-    //     },
-    //     {
-    //         key: '3',
-    //         name: 'Joe Black',
-    //         age: 32,
-    //         address: 'Sydney No. 1 Lake Park',
-    //         tags: ['cool', 'teacher'],
-    //     },
-    // ];
-
-
-    console.log("Run render 000");
     return (
         <>
             <Table
@@ -76,7 +57,13 @@ const UserTable = (props) => {
                 dataSource={dataUsers}
                 rowKey={"id"}
             />
-            <UpdateUserModal/>
+            <UpdateUserModal
+            isModalUpdateOpen = {isModalUpdateOpen}
+            setIsModalUpdateOpen = {setIsModalUpdateOpen}
+            dataUpdate={dataUpdate}
+            setDataUpdate ={setDataUpdate}
+            loadUser = {loadUser}
+            />
         </>
 
     )
