@@ -24,8 +24,8 @@ const deleteUserAPI = (id) => {
     const URL_BACKEND = `api/v1/users/${id}`;
     return axios.delete(URL_BACKEND);
 }
-const fetchAllUserAPI = () => {
-    const URL_BACKEND = "api/v1/users";
+const fetchAllUserAPI = (current, pageSize) => {
+    const URL_BACKEND = `api/v1/users?current=${current}&pageSize=${pageSize}`;
     return axios.get(URL_BACKEND);
 }
 const handleUploadFile = (file, folder) => {
@@ -50,11 +50,22 @@ const updateUserAvatarAPI = (id, fullName, phoneNumber, avatar) => {
     }
     return axios.put(URL_BACKEND, data);
 }
+const registerUserAPI = (fullName, email, password, phoneNumber) => {
+    const URL_BACKEND = "api/v1/users/register";
+    const data = {
+        fullName: fullName,
+        email: email,
+        password: password,
+        phoneNumber: phoneNumber
+    }
+    return axios.post(URL_BACKEND, data);
+}
 export {
     createUserAPI,
     updateUserAPI,
     fetchAllUserAPI,
     deleteUserAPI,
     handleUploadFile,
-    updateUserAvatarAPI
+    updateUserAvatarAPI,
+    registerUserAPI
 }

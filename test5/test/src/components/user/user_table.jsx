@@ -7,7 +7,14 @@ import ViewUserDetail from "./view.user.detail.jsx";
 
 
 const UserTable = (props) => {
-    const {dataUsers, loadUser} = props;
+    const {dataUsers,
+        loadUser,
+        current,
+        pageSize,
+        total,
+        setCurrent,
+        setPageSize
+    } = props;
     const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
     const [dataUpdate, setDataUpdate] = useState(null);
     const [dataDetail, setDataDetail] = useState(null);
@@ -35,7 +42,7 @@ const UserTable = (props) => {
             render: (_, record, index) => {
                 return (
                     <>
-                        index + 1
+                    {(index + 1) + (current - 1) * pageSize}
                     </>
                 )
             }
@@ -101,12 +108,45 @@ const UserTable = (props) => {
             ),
         },
     ];
+    const onChange = (pagination, filters, sorter, extra) => {
+        //if change current page
+        if (pagination && pagination.current) {
+            if (pagination.current !== current) {
+                setCurrent(pagination.current);
+            }
+        }
+        if (pageSize && pagination.pageSize) {
+            if (pagination.pageSize !== pageSize) {
+                setPageSize(pagination.pageSize);
+            }
+        }
+        console.log("Check on change pagination: ", {pagination, filters, sorter, extra});
+    }
     return (
         <>
             <Table
                 columns={columns}
                 dataSource={dataUsers}
                 rowKey={"id"}
+                pagination = {
+                    {
+                        current: current,
+                        pageSize: pageSize,
+                        showSizeChanger: true,
+                        total: total,
+                        showTotal: (total, range) => {
+                            return (
+                                <>
+                                    <div> {range[0]}-{range[1]} trên {total} rows</div>
+
+                                </>
+                            )
+                        }
+                    }
+                }
+                onChange={onChange}
+
+
             />
             <UpdateUserModal
             isModalUpdateOpen = {isModalUpdateOpen}
