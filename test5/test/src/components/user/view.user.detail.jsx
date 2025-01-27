@@ -14,7 +14,9 @@ const ViewUserDetail = (props) => {
     return (
         <>
             <Drawer
+                width = {"40vw"}
                 title="User Detail"
+
                 onClose={() => {
                     setDataDetail(null);
                     setIsDetailOpen(false);
@@ -31,6 +33,12 @@ const ViewUserDetail = (props) => {
                         <br/>
                         <p>Phone Number: {dataDetail.phoneNumber} </p>
                         <br/>
+                        <div>
+                            <img height={250} width={300}
+                                src={`${import.meta.env.VITE_BACKEND_URL}/images/avatar/${dataDetail.avatar}`}
+                            />
+                        </div>
+                        <Button type = 'primary'>Upload Avatar</Button>
 
                     </>
                         :

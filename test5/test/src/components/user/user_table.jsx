@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
-import { Space, Table, Tag } from 'antd';
-import {fetchAllUserAPI} from "../../services/api.service.js";
+import {notification, Popconfirm, Space, Table, Tag} from 'antd';
+import {deleteUserAPI, fetchAllUserAPI} from "../../services/api.service.js";
 import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 import UpdateUserModal from "./update.user.modal.jsx";
 import ViewUserDetail from "./view.user.detail.jsx";
@@ -12,7 +12,23 @@ const UserTable = (props) => {
     const [dataUpdate, setDataUpdate] = useState(null);
     const [dataDetail, setDataDetail] = useState(null);
     const [isDetailOpen, setIsDetailOpen] = useState(false);
-
+    const handleDeleteUser = async (id) => {
+        const res = await deleteUserAPI(id);
+        if (res.status === 204) {
+            notification.success(
+                {
+                    message: "Delete user",
+                    description: "Delete user successfully"
+                }
+            )
+            await loadUser();
+        } else {
+            notification.error({
+                message: "Error deleting user",
+                description: JSON.stringify(res.message)
+            })
+        }
+    }
     const columns = [
         {
             title: 'Id',
@@ -54,7 +70,20 @@ const UserTable = (props) => {
                             }}
                             style={{cursor: "pointer", color: "orange"}}
                         />
-                        <DeleteOutlined style={{cursor: "pointer", color: "red"}}/>
+                        <Popconfirm
+                            title="Delete user"
+                            description="Are you sure to delete this user?"
+                            onConfirm={() => handleDeleteUser(record.id)}
+                            okText="Yes"
+                            cancelText="No"
+                            placement={"left"}
+                        >
+                            <DeleteOutlined
+
+                                style={{cursor: "pointer", color: "red"}}
+                            />
+                        </Popconfirm>
+
                     </div>
 
                 </>
