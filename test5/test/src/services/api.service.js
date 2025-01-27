@@ -28,6 +28,15 @@ const fetchAllUserAPI = () => {
     const URL_BACKEND = "api/v1/users";
     return axios.get(URL_BACKEND);
 }
+const handleUploadFile = (file, folder) => {
+    const URL_BACKEND = "api/v1/file/upload";
+    let config = {
+        headers: {
+            "upload-type": folder,
+        }
+    }
+    return axios.post(URL_BACKEND, data, config);
+}
 export {
     createUserAPI,
     updateUserAPI,
