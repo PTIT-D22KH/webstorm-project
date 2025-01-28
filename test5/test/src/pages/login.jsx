@@ -2,18 +2,22 @@ import {Button, Col, Divider, Form, Input, message, notification, Row} from "ant
 import {Link, useNavigate} from "react-router-dom";
 import {ArrowRightOutlined} from "@ant-design/icons";
 import {loginrAPI} from "../services/api.service.js";
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {AuthContext} from "../components/context/auth.context.jsx";
 
 const LoginPage = () => {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const {setUser} = useContext(AuthContext);
     const onFinish = async (values) => {
         setLoading(true);
         const res = await loginrAPI(values.email, values.password);
         console.log(res);
-        if (res.status == 200) {
+        if (res.data) {
             message.success("Login successfully");
+            localStorage.setItem("access_token", res.data.access_token);
+            setUser(res.data.user);
             navigate("/");
         } else {
             notification.error({

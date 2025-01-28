@@ -65,7 +65,7 @@ const loginrAPI = (email, password) => {
     const data = {
         email: email,
         password: password,
-        // delay: 2000
+        delay: 1000
     }
     return axios.post(URL_BACKEND, data);
 }

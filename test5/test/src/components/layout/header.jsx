@@ -1,9 +1,12 @@
 import {Link, NavLink} from "react-router-dom";
 import { Menu } from 'antd';
 import {AuditOutlined, HomeOutlined, SettingOutlined, UsergroupAddOutlined} from '@ant-design/icons';
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {AuthContext} from "../context/auth.context.jsx";
 
 const Header = () => {
+    const {user} = useContext(AuthContext);
+    console.log("Check data: ", user);
     const items = [
         {
             label: <Link to={"/"}>Home</Link> ,
