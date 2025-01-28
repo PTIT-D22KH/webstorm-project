@@ -25,10 +25,10 @@ const router = createBrowserRouter(
                         index: true,
                         element: <ToDoApp/>
                     },
-                    // {
-                    //     path: "/login",
-                    //     element: <LoginPage/>
-                    // },
+                    {
+                        path: "/login",
+                        element: <LoginPage/>
+                    },
                     {
                         path: "/register",
                         element: <RegisterPage/>

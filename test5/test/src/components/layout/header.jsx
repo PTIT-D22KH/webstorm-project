@@ -1,6 +1,6 @@
 import {Link, NavLink} from "react-router-dom";
 import { Menu } from 'antd';
-import {AuditOutlined, HomeOutlined, UsergroupAddOutlined} from '@ant-design/icons';
+import {AuditOutlined, HomeOutlined, SettingOutlined, UsergroupAddOutlined} from '@ant-design/icons';
 import {useState} from "react";
 
 const Header = () => {
@@ -20,6 +20,21 @@ const Header = () => {
             key: 'SubMenu',
             icon: <AuditOutlined />,
         },
+        {
+            label: "Setting",
+            key: "setting",
+            icon: <SettingOutlined/>,
+            children: [
+                {
+                    label: <Link to={"/login"}>Login</Link>,
+                    key: "login",
+                },
+                {
+                    label: <Link to={"/logout"}>Logout</Link>,
+                    key: "logout",
+                }
+            ]
+        }
     ];
     const [current, setCurrent] = useState('');
     const onClick = (e) => {
